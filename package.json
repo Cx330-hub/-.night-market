@@ -19,7 +19,6 @@
     "url": "https://github.com/Cx330-hub/-night-market/issues"
   },
   "homepage": "https://github.com/Cx330-hub/-night-market#readme",
-  "dependencies": {},
   "devDependencies": {
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0"
