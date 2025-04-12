@@ -1,0 +1,129 @@
+<!DOCTYPE html><!-- 主要用来声明该文档使用的是HTML -->
+<html><!-- 页面根标签 -->
+	<head><!-- 头部标签 -->
+		<meta charset="utf-8"><!-- 元信息 -->
+		<title>夜市翻牌之夜</title><!-- 定义HTML文档页面标题 -->
+		<link rel="icon" href="images/favicon.png" type="image/x-icon"> <!-- 设置favicon-->
+	<style>
+       /* 其他 CSS 样式可以放在这里 */
+	   body {
+	           margin: 0;
+	           padding: 0;
+	           background-color: #0a1929; /* 设置背景颜色为深色，与图片颜色相似 */
+			   background-image: url('images/夜市.png');
+			   			background-size: cover;
+			   			background-position: center;
+			   			width: 100%; height: 100vh;
+	       }
+    </style>
+	</head>
+	<body>
+<!-- 		<div style="background-image: url('images/夜市.png'); 
+					background-size: cover;
+					background-position: center;
+					width: 100%; height: 100vh;">
+					</div> -->
+		
+		<div class="image-container" >
+		        <img id="targetImage" 
+		             src="images/S.png" 
+		             onclick="changeRandomImage()"
+					 style="width: 200px;
+					 position: absolute;
+					 left: 50%;
+					 top: 50%;
+					 transform: translate(-50%, -50%);">
+		    </div>
+		
+		    <script>
+		        // 定义图片路径数组
+		        const imagePool = [
+		            "images/A.png",
+					"images/B.png",
+					"images/C.png",
+		            "images/D.png"
+		        ];
+				// ███ 状态管理 ███
+				        let lastIndex = -1;      // 上次显示的索引
+				        let isFirstClick = true; // 首次点击标识
+				        let isLoading = false;  // 加载状态锁
+						// ███ 预加载系统 ███
+						        function preloadImages() {
+						            imagePool.forEach(url => {
+						                const img = new Image();
+						                img.src = url;
+						                console.log(`预加载完成: ${url}`);
+						            });
+						        }
+						        window.onload = preloadImages; // 页面加载时预载
+								 // ███ 核心切换函数 ███
+								        function changeImage() {
+								            if (isLoading) return; // 防止重复点击
+								            
+								            const imgElement = document.getElementById("targetImage");
+								            isLoading = true;
+								            
+								            // 显示加载状态
+								            imgElement.classList.add('loading');
+								
+								            // ███ 随机逻辑（防重复） ███
+								            let newIndex;
+								            do {
+								                newIndex = Math.floor(Math.random() * imagePool.length);
+								            } while (imagePool.length > 1 && newIndex === lastIndex);
+								            lastIndex = newIndex;
+								
+								            // ███ 带过渡的切换 ███
+								            imgElement.style.opacity = 0;
+								            
+								            setTimeout(async () => {
+								                try {
+								                    // 如果是首次点击，替换初始图
+								                    if (isFirstClick) {
+								                        isFirstClick = false;
+								                        imgElement.src = imagePool[newIndex];
+								                    } else {
+								                        // ███ 确保图片加载完成 ███
+								                        await new Promise((resolve) => {
+								                            const tempImg = new Image();
+								                            tempImg.onload = () => {
+								                                imgElement.src = tempImg.src;
+								                                resolve();
+								                            };
+								                            tempImg.src = imagePool[newIndex];
+								                        });
+								                    }
+								                } catch (error) {
+								                    console.error('图片加载失败:', error);
+								                } finally {
+								                    imgElement.style.opacity = 1;
+								                    imgElement.classList.remove('loading');
+								                    isLoading = false;
+								                }
+								            }, 400);
+								        }
+				// 图片切换函数
+				        function changeRandomImage() {
+				            const imgElement = document.getElementById("targetImage");
+				            
+				            // 生成随机索引
+				            const randomIndex = Math.floor(Math.random() * imagePool.length);
+				            
+				            // 应用新图片（带过渡效果）
+				            imgElement.style.opacity = 0;
+				            setTimeout(() => {
+				                imgElement.src = imagePool[randomIndex];
+				                imgElement.style.opacity = 1;
+				            }, 300);
+				        }
+		        
+		        let currentImage = 0;
+		
+		        function toggleImage() {
+		            // 切换索引（0→1→0→1...）
+		            currentImage = 1 - currentImage;
+		            document.getElementById("myImage").src = images[currentImage];
+		        }
+		    </script>
+	</body>
+</html>
