@@ -2,33 +2,26 @@
   "name": "html",
   "version": "1.0.0",
   "main": "index.js",
+  "description": "A web project",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cx330-hub/-.night-market.git"
+    "url": "git+https://github.com/Cx330-hub/-night-market.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Cx330-hub/-.night-market/issues"
+    "url": "https://github.com/Cx330-hub/-night-market/issues"
   },
-  "homepage": "https://github.com/Cx330-hub/-.night-market#readme",
-  "description": ""
-  {
-    "name": "your-project",
-    "version": "1.0.0",
-    "description": "A web project",
-    "main": "index.js",
-    "scripts": {
-      "build": "webpack --mode production",
-      "start": "node index.js"
-    },
-    "dependencies": {},
-    "devDependencies": {
-      "webpack": "^5.0.0",
-      "webpack-cli": "^4.0.0"
-    }
+  "homepage": "https://github.com/Cx330-hub/-night-market#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
   }
+}
